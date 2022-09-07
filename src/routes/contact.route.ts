@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 
-import * as contactController from "./contact.controller";
+import * as contactController from "../controllers/contact.controller";
 
 const router = Router();
 
@@ -18,13 +18,18 @@ router.get("/test", (req: Request, res: Response) => {
   });
 });
 
+// mongo-related routes
+
 router
   .route("/contacts")
   .get(contactController.index)
   .post(contactController.add);
 
 router.route("/contacts/addRandom").post(contactController.addRandom);
-router.route("/contacts/addRandom/:count").post(contactController.addNRandom);
+
+router
+  .route("/contacts/addRandom/:count")
+  .post(contactController.addMultipleRandom);
 
 router
   .route("/contacts/:contact_id")

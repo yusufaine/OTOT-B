@@ -2,7 +2,7 @@ import "dotenv/config";
 import BodyParser from "body-parser";
 import express, { Request, Response } from "express";
 
-import router from "./routes";
+import router from "./routes/contact.route";
 
 const PORT = Number(process.env.PORT) ?? 8080;
 
