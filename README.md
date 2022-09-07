@@ -97,7 +97,11 @@ Note:
 
 ## Task B2.1: Testing through Continuous Integration
 
+[TODO] CI with Jest(?) to test endpoints
+
 ## Task B2.2: Deploying through Continuous Deployment
+
+[TODO] CD with GCP Cloud Build + Cloud Run on changes to main via `Dockerfile`.
 
 ## Task B3: Implement a Frontend
 
