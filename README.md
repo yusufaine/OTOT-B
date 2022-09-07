@@ -37,7 +37,8 @@ docker ps -a
 
 ### Cloud Deployment
 
-I chose to use Google Cloud Platform as some free credits were given for it, and I chose to use Cloud Run as I did not *need* to have this service up and running 24/7.
+Google Cloud Platform was chosen as free credits were given for it.
+Cloud Run was the used over App Engine as there was no *need* to have this service up and running 24/7.
 
 I followed along with the [official documentation from Google](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-nodejs-service) to assist me with the deployment but I would go over some of the steps that I took to deploy the application.
 
@@ -50,7 +51,7 @@ I followed along with the [official documentation from Google](https://cloud.goo
 
 1. Create a [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
 2. Ensure that billing is enabled
-   1. It is quite unlikely that we would be billed as [the first 180,000 vCPU seconds are free](https://cloud.google.com/run/pricing#tables), though I recommend to delete the instance just to be safe.
+   * It is quite unlikely that we would be billed as [the first 180,000 vCPU seconds are free](https://cloud.google.com/run/pricing#tables), though I recommend to delete the instance just to be safe.
 3. Set the project ID (project name is NOT project ID) for the deployment
 
     ```bash
@@ -85,7 +86,7 @@ Explanation of HTTP requests:
 * `contacts/addRandom/:count`: similar to `addRandom`, but for multiple people
 * `contacts/:contact_id`: Throws error if (mongo) ID does not exist
   * `GET`: returns contact with the specified ID -- refer to `contacts`
-  * `PATCH/PUT`: updates a specific field given an ID
+  * `PATCH` / `PUT`: updates a specific field given an ID
   * `DELETE`: removes the specified contact from the database
 * `contacts/clear/all`: helper endpoint to wipe the entire contacts database
 
