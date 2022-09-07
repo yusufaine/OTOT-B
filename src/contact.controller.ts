@@ -12,7 +12,12 @@ export function index(_req: Request, res: Response) {
       if (error) {
         res.json(buildErrorJson(error.message));
       } else {
-        res.json(buildSuccessJson("contacts obtained successfully", result));
+        res.json(
+          buildSuccessJson("contacts obtained successfully", {
+            count: result.length,
+            result,
+          })
+        );
       }
     });
 }

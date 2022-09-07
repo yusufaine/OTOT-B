@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-import { buildErrorJson, DB_COLLECTION, DB_NAME } from "./utils";
+import { DB_COLLECTION, DB_NAME } from "./utils";
 import { ContactSchema } from "./contact.types";
 
 const MONGO_URI = process.env.MONGO_URI;
@@ -10,6 +10,12 @@ if (!MONGO_URI) {
 }
 
 const mongoClient = new MongoClient(MONGO_URI);
+mongoClient.connect((error, _result) => {
+  if (error) {
+    throw new Error(error.message);
+  }
+});
+
 export const mongoCollection = mongoClient
   .db(DB_NAME)
   .collection<ContactSchema>(DB_COLLECTION);
