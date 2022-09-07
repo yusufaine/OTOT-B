@@ -12,7 +12,6 @@
 2. `.env` file that follows the format as shown:
 
     ```text
-
     PORT=<number>
     MONGO_URI=mongodb+srv://<user>:<password>@<database_url>
     ```
@@ -97,7 +96,7 @@ Note:
 
 ## Task B2.1: Testing through Continuous Integration
 
-## Task B2.2: Deployiung through Continuous Deployment
+## Task B2.2: Deploying through Continuous Deployment
 
 ## Task B3: Implement a Frontend
 
