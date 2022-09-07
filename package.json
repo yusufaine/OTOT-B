@@ -2,7 +2,7 @@
   "name": "task-b-otot",
   "version": "1.0.0",
   "description": "Task B - OTOT",
-  "main": "src/app.ts",
+  "main": "dist/index.js",
   "license": "MIT",
   "dependencies": {
     "@faker-js/faker": "^7.5.0",
@@ -19,14 +19,16 @@
     "eslint": "^8.23.0",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
+    "tsx": "^3.9.0",
     "typescript": "^4.8.2"
   },
   "engines": {
     "node": ">=12.0.0"
   },
   "scripts": {
-    "prebuild": "rm -rdf ./dist",
-    "build": "yarn prebuild && tsc",
-    "dev": "tsx watch src/index.ts"
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "gcp-build": "tsc -p .",
+    "start": "node ./dist/index.js"
   }
 }

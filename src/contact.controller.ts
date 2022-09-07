@@ -93,7 +93,11 @@ export function view(req: Request, res: Response) {
     if (error) {
       res.json(buildErrorJson(error.message));
     } else {
-      res.json(buildSuccessJson("contact found", result));
+      if (!result) {
+        res.json(buildErrorJson("contact not found"));
+      } else {
+        res.json(buildSuccessJson("contact found", result));
+      }
     }
   });
 }

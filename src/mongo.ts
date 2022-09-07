@@ -10,7 +10,7 @@ if (!MONGO_URI) {
 }
 
 const mongoClient = new MongoClient(MONGO_URI);
-mongoClient.connect((error, _result) => {
+mongoClient.connect((error, result) => {
   if (error) {
     throw new Error(error.message);
   }
