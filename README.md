@@ -62,9 +62,11 @@ I followed along with the [official documentation from Google](https://cloud.goo
     # setting defaults
     gcloud config set run/region asia-southeast1 # deploy to Singapore by default
 
-    # deploy to Cloud Run
-    pwd # root directory of the project
+    # deploy to Cloud Run at the root of the project directory
     gcloud run deploy --source .
+
+    # provide the service name when prompted
+
     ```
 
 ### Testing via Postman
