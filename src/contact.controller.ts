@@ -116,28 +116,25 @@ export async function update(req: Request, res: Response) {
 
   if (!contact) {
     res.json(buildErrorJson("contact not found"));
-  } else {
-    contact.email = req.body.email ?? contact.email;
-    contact.name = req.body.name ?? contact.name;
-
-    if (contact.gender || req.body.gender) {
-      contact.gender = req.body.gender ?? contact.gender;
-    }
-
-    if (contact.phone || req.body.phone) {
-      contact.phone = req.body.phone ?? contact.phone;
-    }
-
-    const update: UpdateFilter<ContactSchema> = { $set: contact };
-
-    mongoCollection.updateOne(filter, update, (error, result) => {
-      if (error) {
-        res.json(buildErrorJson(error.message));
-      } else {
-        res.json(buildSuccessJson("contact updated", { result, contact }));
-      }
-    });
+    return;
   }
+
+  const updatedContact: ContactSchema = {
+    email: req.body.email ?? contact.email,
+    name: req.body.name ?? contact.name,
+    gender: req.body.gender ?? contact.gender ?? "",
+    phone: req.body.phone ?? contact.phone ?? "",
+  };
+
+  const update: UpdateFilter<ContactSchema> = { $set: updatedContact };
+
+  mongoCollection.updateOne(filter, update, (error, result) => {
+    if (error) {
+      res.json(buildErrorJson(error.message));
+    } else {
+      res.json(buildSuccessJson("contact updated", { result, contact }));
+    }
+  });
 }
 
 export function remove(req: Request, res: Response) {
