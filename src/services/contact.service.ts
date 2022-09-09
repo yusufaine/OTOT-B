@@ -3,7 +3,11 @@ import { Filter, ObjectId, UpdateFilter } from "mongodb";
 
 import { mongoCollection } from "./mongo.service";
 import { ContactSchema } from "../models/contact.models";
-import { buildErrorJson, buildSuccessJson } from "../utils/json.utils";
+import {
+  buildErrorJson,
+  buildSuccessJson,
+  JsonResponseType,
+} from "../utils/json.utils";
 import { createFakeContact } from "../utils/faker.utils";
 
 export async function index() {
@@ -12,14 +16,16 @@ export async function index() {
       .find({}, { projection: { __v: 0 } })
       .toArray();
 
-    return allContacts.length
-      ? buildSuccessJson("contacts retrieved", {
-          data: {
-            count: allContacts.length,
-            contacts: allContacts,
-          },
-        })
-      : buildSuccessJson("contacts is empty");
+    const contactMsg = allContacts.length
+      ? "contacts retrieved"
+      : "no contacts stored";
+
+    return buildSuccessJson(contactMsg, {
+      data: {
+        count: allContacts.length,
+        contacts: allContacts,
+      },
+    });
   } catch (error) {
     return buildErrorJson("unable to get all contacts", error);
   }
@@ -89,10 +95,10 @@ export async function addMultipleRandom(req: Request) {
 }
 
 export async function view(req: Request) {
-  if (!req.params.contact_id) {
-    return buildErrorJson("contact_id not specified");
+  const objId = isValidId(req.params.contact_id);
+  if ((objId as any).status) {
+    return objId as JsonResponseType;
   }
-
   const filter: Filter<ContactSchema> = {
     _id: new ObjectId(req.params.contact_id),
   };
@@ -161,7 +167,19 @@ export async function remove(req: Request) {
 export async function clearDb() {
   const res = await mongoCollection.deleteMany({});
 
-  return res.acknowledged
-    ? buildSuccessJson("db cleared", { count: res.deletedCount })
-    : buildErrorJson("unable to clear db");
+  if (!res.acknowledged) {
+    return buildErrorJson("unable to clear db");
+  }
+
+  return res.deletedCount == 0
+    ? buildSuccessJson("database is already empty")
+    : buildSuccessJson("db cleared", { count: res.deletedCount });
+}
+
+function isValidId(contact_id: string): ObjectId | JsonResponseType {
+  try {
+    return new ObjectId(contact_id);
+  } catch (error) {
+    return buildErrorJson("expected hex string of length 24");
+  }
 }
