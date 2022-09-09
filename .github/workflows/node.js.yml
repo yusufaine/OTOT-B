@@ -12,22 +12,23 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest, macos-latest, windows-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - name: Load secrets
       run: echo ${{secrets.OTOT_B_MONGO_URI}}
+      env:
+        OTOT_B_MONGO_URI: ${{secrets.OTOT_B_MONGO_URI}}
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        OTOT_B_MONGO_URI: ${{secrets.OTOT_B_MONGO_URI}}
     - run: yarn install --frozen-lockfile
     - run: yarn test
