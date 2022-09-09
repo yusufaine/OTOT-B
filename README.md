@@ -91,6 +91,7 @@ Optionally, Secret Manager was used also used to manage `.env` secrets without e
 3. How do I use Secret Manager with GCP Cloud Run?
    * You can refer to the [official documentation](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#secretmanager-add-secret-version-gcloud).
    * Exclude `.env` and other unnecessary files in `.gcloudignore`.
+   * Verify that secrets are loaded in: `Cloud Run` > `SERVICE_NAME` >`Revisions` > Select running revision > `Containers` > `Environment variables`
    * TLDR via gcloud CLI:
 
       ```bash
