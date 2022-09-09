@@ -40,7 +40,9 @@ docker ps -a
 Google Cloud Platform was chosen as free credits were given for it.
 Cloud Run was the used over App Engine as there was no *need* to have this service up and running 24/7.
 
-I followed along with the [official documentation from Google](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-nodejs-service) to assist me with the deployment but I would go over some of the steps that I took to deploy the application.
+The [official documentation from Google](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-nodejs-service) to assist the deployment but some deployment steps are included.
+
+Optionally, Secret Manager was used also used to manage `.env` secrets without explicitly sharing the file.
 
 #### GCP Requirements
 
@@ -52,7 +54,9 @@ I followed along with the [official documentation from Google](https://cloud.goo
 1. Create a [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
 2. Ensure that billing is enabled
    * It is quite unlikely that we would be billed as [the first 180,000 vCPU seconds are free](https://cloud.google.com/run/pricing#tables), though I recommend to delete the instance just to be safe.
-3. Set the project ID (project name is NOT project ID) for the deployment
+3. Set the project ID (project name is NOT project ID) for the deployment.
+4. Create a `.gcloudignore` to ignore unnecessary files that are not needed for deployment.
+   * Do NOT add `.env` if Secret Manager is not planned to be used.
 
     ```bash
     # get project ID
@@ -63,11 +67,47 @@ I followed along with the [official documentation from Google](https://cloud.goo
     gcloud config set run/region asia-southeast1 # deploy to Singapore by default
 
     # deploy to Cloud Run at the root of the project directory
-    gcloud run deploy --source .
+    gcloud run deploy <service-name> --source .
 
-    # provide the service name when prompted
-
+    # Alternatively provide the necessary params. 
+    # I excluded `.env` as seen in `.gcloudignore` as I was using Secret Manager (optional) 
+    
+    # gcloud run deploy task-b1-otot --source . \
+    #  --update-secrets OTOT_B_MONGO_PORT=OTOT_B_MONGO_PORT:latest \
+    #  --update-secrets OTOT_B_MONGO_URI=OTOT_B_MONGO_URI:latest \
+    #  --update-secrets OTOT_B_SOURCE=OTOT_B_SOURCE:latest
     ```
+
+#### Troubleshoot Cloud Run Deployment
+
+1. Unable to build container
+   * Try to build and run `Dockerfile` locally and ensure that it works.
+   * `.dockerignore` file is optional, but ensures that only the necessary files are copied over (non-documentation related).
+2. "Successfully deployed on GCP Run but I'm unable to access the link that was generated"
+   * Ensure the following settings in `Cloud Run` > `SERVICE_NAME` >`Triggers`
+     * `Ingress`: Allow all traffic
+     * `Authentication`: Allow unauthenticated invocations
+       * This is set to false if the default is chosen in the deployment step.
+3. How do I use Secret Manager with GCP Cloud Run?
+   * You can refer to the [official documentation](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#secretmanager-add-secret-version-gcloud).
+   * Exclude `.env` and other unnecessary files in `.gcloudignore`.
+   * TLDR via gcloud CLI:
+
+      ```bash
+      # Create secret (no initial value)
+      gcloud secrets create <SECRET_NAME>
+
+      # Add initial/update secret
+      echo -n "SECRET_VALUE" | gcloud secrets versions add <SECRET_NAME> --data-file=- 
+
+      # Verify
+      gcloud secrets versions access <VERSION> --secret="SECRET_NAME"
+
+      # Example
+      # gcloud secrets versions access <N> --secret="SECRET_NAME" 
+      # gcloud secrets versions access latest --secret="SECRET_NAME" 
+
+      ```
 
 ### Testing via Postman
 
