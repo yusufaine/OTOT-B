@@ -36,7 +36,6 @@
     "build": "yarn clean && tsc",
     "clean": "rimraf dist",
     "dev": "tsx watch ./src/index.ts",
-    "gcp-build": "tsc -p .",
     "start": "yarn build && node ./dist/index.js",
     "test": "jest --forceExit"
   }
