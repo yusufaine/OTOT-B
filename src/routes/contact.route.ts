@@ -18,7 +18,7 @@ function routes(app: Express) {
   });
 
   app.get("/healthcheck", (_req: Request, res: Response) => {
-    res.sendStatus(200);
+    res.sendStatus(200).json("Everything's ok!");
   });
 
   // mongo-related routes
