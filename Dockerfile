@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json /app/
 COPY yarn.lock /app/
 COPY tsconfig*.json /app/
-RUN yarn install
+RUN yarn install --prefer-offline --frozen-lockfile
 COPY . .
 
 RUN yarn build

@@ -33,6 +33,7 @@ jobs:
           OTOT_B_MONGO_URI: ${{secrets.OTOT_B_MONGO_URI}}
 
   deploy:
+    needs: test
     permissions:
       contents: "read"
       id-token: "write"
