@@ -136,13 +136,78 @@ Note:
 * `params` and `body` would need to be updated manually, where they are necessary.
 * The default mongo ID is used for demonstration purposes. Realisitically, the entries would likely be indexed by phone number and checked for uniqueness.
 
+### Screenshots
+
+#### `GET`: get contacts given empty database
+
+![get data from empty database](https://i.ibb.co/7RffN9t/image.png)
+
+#### `POST`: invalid contact (missing name)
+
+![post invalid contact](https://i.ibb.co/sVDLJ8Q/image.png)
+
+#### `POST`: valid contact
+
+![post valid contact](https://i.ibb.co/sRT13JB/image.png)
+
+#### `PATCH`/`PUT`: update value of contact
+
+![patch in action](https://i.ibb.co/4pzdfZS/image.png)
+
+#### `DELETE`: remove specified contact
+
+![delete in action](https://i.ibb.co/rFDp5rs/image.png)
+
 ## Task B2.1: Testing through Continuous Integration
 
-[TODO] CI with Jest(?) to test endpoints
+This section briefly goes over how Jest and Superset were used to test the application locally as well as through CI tools (Github Action).
+
+### Summary of CI
+
+* For testing, [Jest](https://jestjs.io/) was used along with [Superset](https://github.com/visionmedia/supertest) to test the REST endpoints.
+* For these series of tests, the actual database that is deployed is being used as there were issues with using a mock or in-memory database.
+  * As such, the `--forceExit` flag was needed as the database connection was still open.
+* While `PATCH`, and `PUT` serves provides only the modified and full data with the modified values respectively, they serve the same function in this task (as I only found out the difference after the fact).
+* The Postman collection can be found [here](https://www.getpostman.com/collections/5d4bca11ee5b837a69a9) with the variables already set as well as some helper endpoints that can be used to populate the database.
+* The Github Action yaml file can be viewed [here](https://github.com/yusufaine/OTOT-B/blob/main/.github/workflows/ci-cd.yaml).
+
+### Local test output
+
+![Jest output](https://i.ibb.co/5s1M7Nm/image.png)
+
+### Testing via [Github Action](https://github.com/yusufaine/OTOT-B/runs/8274401733?check_suite_focus=true)
+
+![Github Actions output](https://i.ibb.co/WkcHnRF/image.png)
 
 ## Task B2.2: Deploying through Continuous Deployment
 
-[TODO] CD with GCP Cloud Build + Cloud Run on changes to main via `Dockerfile`.
+Building from the previos sections, this section briefly goes over how Github Action is used as a CD tool, paired with Google's Cloud Run to ensure that the latest (tested) version is deployed live.
+
+### Summary of CD
+
+* With reference to the [Github Action yaml](https://github.com/yusufaine/OTOT-B/blob/main/.github/workflows/ci-cd.yaml), the deployment step had to somehow execute after all the tests ran successfully, and build and/or deploy the repo/`Dockerfile`.
+* While Google Cloud Run allows to setup continous deployment fairly easily, deployment via `Dockerfile` was preferred as the process was more straight-forward.
+  * Cloud Run's CD creates a Cloud Build trigger that can launch when something is being pushed to the monitored branch of the repo (requires Github authorisation).
+  * The build step is not able to be observed from Github's interface, only through GCP Cloud Build.
+  * There was not a clear way to conditionally build -- if the testing step fails, it still gets built and deploys to Cloud Run.
+* CD via Github Actions is also a little invovled as it requires setting up a few resources that allows Github to access the GCP project so that it can deploy the `Dockerfile` accordingly.
+  * This [Google community tutorial](https://cloud.google.com/community/tutorials/cicd-cloud-run-github-actions) was used to setup the GCP Deploy account and obtain the necessary credential.
+  * The [official Github Action from Google](https://github.com/marketplace/actions/deploy-to-cloud-run#credentials) was also referenced.
+
+
+### Continuous Deployment Screenshots
+
+#### Deploy only after successful test
+
+![deploy after test](https://i.ibb.co/TT0tpD2/image.png)
+
+#### Github Action CD Logs
+
+![Github Action CD Logs](https://i.ibb.co/184wn5h/image.png)
+
+#### Deployed via Google's Service Account
+
+![deployed via Google's Service Account](https://i.ibb.co/rm9yTHF/image.png)
 
 ## Task B3: Implement a Frontend
 
