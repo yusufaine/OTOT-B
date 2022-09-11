@@ -211,4 +211,6 @@ Building from the previos sections, this section briefly goes over how Github Ac
 
 ## Task B3: Implement a Frontend
 
+TODO: Use Next
+
 ## Task B4: Pulling data from Serverless Function to Frontend
