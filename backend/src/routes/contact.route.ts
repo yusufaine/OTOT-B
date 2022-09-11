@@ -18,11 +18,10 @@ function routes(app: Express) {
   });
 
   app.get("/healthcheck", (_req: Request, res: Response) => {
-    res.sendStatus(200).json("Everything's ok!");
+    res.status(200).json("Everything's ok!");
   });
 
   // mongo-related routes
-
   app
     .route("/api/contacts")
     .get(contactController.index)
@@ -42,6 +41,16 @@ function routes(app: Express) {
     .delete(contactController.remove);
 
   app.route("/api/contacts/clear/all").delete(contactController.clearDb);
+
+  // catch unhandle routes
+  app.use((req: Request, res: Response) => {
+    res.status(404);
+    res.json({
+      status: 404,
+      title: "Not found",
+      msg: `"${req.url}" not found`,
+    });
+  });
 }
 
 export default routes;
