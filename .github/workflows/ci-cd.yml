@@ -18,6 +18,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: cd into backend
+        run: cd backend
+
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
@@ -26,11 +29,9 @@ jobs:
 
       - name: Install project dependencies
         run: yarn install --prefer-offline --frozen-lockfile
-        working-directory: ./backend
 
       - name: Run Jest
         run: yarn test
-        working-directory: ./backend
         env:
           OTOT_B_MONGO_URI: ${{secrets.OTOT_B_MONGO_URI}}
 
@@ -43,6 +44,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: cd into backend
+        run: cd backend
 
       - name: Google Auth
         id: auth
@@ -60,7 +64,6 @@ jobs:
         run: |-
           docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} .
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }}
-        working-directory: ./backend
 
       - name: Deploy Backend to Cloud Run
         run: |-
