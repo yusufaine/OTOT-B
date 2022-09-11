@@ -12,12 +12,12 @@ env:
   REGION: asia-southeast1
 
 jobs:
-  test:
+  test backend:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - run: cd backend
+      - working-directory: ./backend
 
       - name: Use Node.js 18
         uses: actions/setup-node@v3
@@ -33,7 +33,7 @@ jobs:
         env:
           OTOT_B_MONGO_URI: ${{secrets.OTOT_B_MONGO_URI}}
 
-  deploy:
+  deploy backend:
     needs: test
     permissions:
       contents: "read"
