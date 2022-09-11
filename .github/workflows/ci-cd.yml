@@ -61,12 +61,6 @@ jobs:
       - name: Authorise Docker push
         run: gcloud auth configure-docker
 
-      - name: cd into backend
-        run: |-
-          cd backend
-          pwd
-          ls -al
-
       - name: Build and Push Container
         run: |-
           docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} .
