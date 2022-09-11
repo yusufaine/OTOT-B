@@ -6,8 +6,8 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "backend/**"
       - "!*.md"
+      - "!ci-cd.yml"
 
 env:
   PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
@@ -74,4 +74,7 @@ jobs:
           gcloud run deploy ${{ env.SERVICE }} \
             --region ${{ env.REGION }} \
             --image gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} \
-            --platform "managed"
+            --platform "managed" \
+            --update-secrets OTOT_B_MONGO_PORT=OTOT_B_MONGO_PORT:latest \
+            --update-secrets OTOT_B_MONGO_URI=OTOT_B_MONGO_URI:latest \
+            --update-secrets OTOT_B_SOURCE=OTOT_B_SOURCE:latest
