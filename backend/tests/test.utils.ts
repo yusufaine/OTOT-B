@@ -9,7 +9,6 @@ export const validContact: ContactSchema = {
 
 export const invalidContact: Partial<ContactSchema> = {
   email: "dummy@email.com",
-  // name: "Valid User",
   gender: "male",
   phone: "+65 8491 2483",
 };
