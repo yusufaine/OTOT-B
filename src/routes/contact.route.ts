@@ -24,24 +24,24 @@ function routes(app: Express) {
   // mongo-related routes
 
   app
-    .route("/contacts")
+    .route("/api/contacts")
     .get(contactController.index)
     .post(contactController.add);
 
-  app.route("/contacts/addRandom").post(contactController.addRandom);
+  app.route("/api/contacts/addRandom").post(contactController.addRandom);
 
   app
-    .route("/contacts/addRandom/:count")
+    .route("/api/contacts/addRandom/:count")
     .post(contactController.addMultipleRandom);
 
   app
-    .route("/contacts/:contact_id")
+    .route("/api/contacts/:contact_id")
     .get(contactController.view)
     .patch(contactController.update)
     .put(contactController.update)
     .delete(contactController.remove);
 
-  app.route("/contacts/clear/all").delete(contactController.clearDb);
+  app.route("/api/contacts/clear/all").delete(contactController.clearDb);
 }
 
 export default routes;
