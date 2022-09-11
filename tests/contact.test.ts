@@ -28,7 +28,7 @@ describe(`from "/healthcheck`, () => {
 describe(`from "/contacts"`, () => {
   describe("GET", () => {
     test("get all listed contacts", async () => {
-      const res = await request(app).get("/contacts");
+      const res = await request(app).get("/api/contacts");
 
       expect(res.statusCode).toBe(200);
       contactCount = Number(res.body.data.count);
@@ -43,14 +43,16 @@ describe(`from "/contacts"`, () => {
   describe("POST", () => {
     describe("given an invalid contact", () => {
       test("returns error json", async () => {
-        const res = await request(app).post("/contacts").send(invalidContact);
+        const res = await request(app)
+          .post("/api/contacts")
+          .send(invalidContact);
         expect(res.statusCode).toBe(200);
         expect(res.body.message).toBe("email and name has to be specified");
       });
     });
     describe("given a valid contact", () => {
       test("returns success json with the contact data", async () => {
-        const res = await request(app).post("/contacts").send(validContact);
+        const res = await request(app).post("/api/contacts").send(validContact);
         validContactId = res.body.data._id;
 
         expect(res.statusCode).toBe(200);
@@ -66,14 +68,16 @@ describe(`from "/contacts/:contact_id`, () => {
     describe("given an invalid contact_id length", () => {
       test("returns error json", async () => {
         const invalidContactId = "-1";
-        const res = await request(app).get(`/contacts/${invalidContactId}`);
+        const res = await request(app).get(`/api/contacts/${invalidContactId}`);
         expect(res.statusCode).toBe(200);
         expect(res.body.message).toBe("expected hex string of length 24");
       });
       describe("given an invalid contact_id of valid length", () => {
         test("returns error json", async () => {
           const invalidContactId = "------------------------";
-          const res = await request(app).get(`/contacts/${invalidContactId}`);
+          const res = await request(app).get(
+            `/api/contacts/${invalidContactId}`
+          );
           expect(res.statusCode).toBe(200);
           expect(res.body.message).toBe("expected hex string of length 24");
         });
@@ -81,7 +85,9 @@ describe(`from "/contacts/:contact_id`, () => {
       describe("given a valid hex string that does not exist in db", () => {
         test("returns json stating id does not exist", async () => {
           const invalidContactId = "0123abcd0123abcd0123abcd";
-          const res = await request(app).get(`/contacts/${invalidContactId}`);
+          const res = await request(app).get(
+            `/api/contacts/${invalidContactId}`
+          );
           expect(res.statusCode).toBe(200);
           expect(res.body.message).toBe(`${invalidContactId} not found`);
         });
@@ -89,7 +95,7 @@ describe(`from "/contacts/:contact_id`, () => {
     });
     describe("given a valid contact_id", () => {
       test("return associated contact", async () => {
-        const res = await request(app).get(`/contacts/${validContactId}`);
+        const res = await request(app).get(`/api/contacts/${validContactId}`);
         expect(res.statusCode).toBe(200);
         expect(_.omit(res.body.data, "_id")).toEqual(validContact);
       });
@@ -107,7 +113,7 @@ describe(`from "/contacts/:contact_id`, () => {
           gender: "female",
         }; //originally male
         const res = await request(app)
-          .patch(`/contacts/${validContactId}`)
+          .patch(`/api/contacts/${validContactId}`)
           .send(updatedContact);
 
         expect(res.statusCode).toBe(200);
@@ -124,7 +130,9 @@ describe(`from "/contacts/:contact_id`, () => {
     describe("skipping invalid contact_id", () => {});
     describe("remove valid contact_id", () => {
       test("returns success json with the deleted contact infomation", async () => {
-        const res = await request(app).delete(`/contacts/${validContactId}`);
+        const res = await request(app).delete(
+          `/api/contacts/${validContactId}`
+        );
 
         expect(res.statusCode).toBe(200);
         expect(res.body.data).toEqual(updatedContact);
