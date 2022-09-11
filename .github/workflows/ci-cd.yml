@@ -25,12 +25,12 @@ jobs:
           cache: "yarn"
 
       - name: Install project dependencies
-        working-directory: ./backend
         run: yarn install --prefer-offline --frozen-lockfile
+        working-directory: ./backend
 
       - name: Run Jest
-        working-directory: ./backend
         run: yarn test
+        working-directory: ./backend
         env:
           OTOT_B_MONGO_URI: ${{secrets.OTOT_B_MONGO_URI}}
 
@@ -58,8 +58,9 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} ./backend
+          docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} .
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }}
+        working-directory: ./backend
 
       - name: Deploy Backend to Cloud Run
         run: |-
