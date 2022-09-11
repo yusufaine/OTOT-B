@@ -12,7 +12,7 @@ env:
   REGION: asia-southeast1
 
 jobs:
-  test backend:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,7 +33,7 @@ jobs:
         env:
           OTOT_B_MONGO_URI: ${{secrets.OTOT_B_MONGO_URI}}
 
-  deploy backend:
+  deploy:
     needs: test
     permissions:
       contents: "read"
