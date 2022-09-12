@@ -160,11 +160,11 @@ Note:
 
 ## Task B2.1: Testing through Continuous Integration
 
-This section briefly goes over how Jest and Superset were used to test the application locally as well as through CI tools (Github Action).
+This section briefly goes over how Jest and Supertest were used to test the application locally as well as through CI tools (Github Action).
 
 ### Summary of CI
 
-* For testing, [Jest](https://jestjs.io/) was used along with [Superset](https://github.com/visionmedia/supertest) to test the REST endpoints.
+* For testing, [Jest](https://jestjs.io/) was used along with [Supertest](https://github.com/visionmedia/) to test the REST endpoints.
 * For these series of tests, the actual database that is deployed is being used as there were issues with using a mock or in-memory database.
   * As such, the `--forceExit` flag was needed as the database connection was still open.
 * While `PATCH`, and `PUT` serves provides only the modified and full data with the modified values respectively, they serve the same function in this task (as I only found out the difference after the fact).
