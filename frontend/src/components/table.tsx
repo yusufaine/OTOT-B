@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import { ContactSchema } from "../types/contact.models";
 
 const instance = axios.create({
-  baseURL: process.env.BACKEND_API ?? "http://localhost:8080",
+  baseURL: process.env.REACT_APP_BACKEND_API || "http://localhost:8080",
 });
 
 export default function BasicTable() {
