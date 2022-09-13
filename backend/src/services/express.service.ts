@@ -12,11 +12,8 @@ function createServer() {
     })
   );
   app.use(BodyParser.json());
-  app.use(
-    cors<Request>({
-      origin: "*",
-    })
-  );
+  app.use(cors());
+  app.options("*", cors());
   routes(app);
 
   return app;

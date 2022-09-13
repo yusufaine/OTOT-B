@@ -7,7 +7,10 @@ import MuiTable from "./components/table";
 function App() {
   const instance = axios.create({
     baseURL: process.env.REACT_APP_BACKEND_API || "http://localhost:8080",
+    headers: {},
   });
+
+  console.log(instance.getUri());
 
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
