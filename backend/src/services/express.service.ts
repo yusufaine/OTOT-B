@@ -1,19 +1,12 @@
 import BodyParser from "body-parser";
-import express, { NextFunction, Request, Response } from "express";
+import cors from "cors";
+import express from "express";
 
 import routes from "../routes/contact.route";
 
 function createServer() {
   const app = express();
-  app.use((_req: Request, res: Response, next: NextFunction) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
-
+  app.use(cors());
   app.use(
     BodyParser.urlencoded({
       extended: true,
