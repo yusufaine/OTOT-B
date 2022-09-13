@@ -10,11 +10,11 @@ let contactCount = 0;
 let validContactId = "";
 let updatedContact = {};
 
-// describe("intentionally invalid test", () => {
-//   test("1+1=2", () => {
-//     expect(1 + 1).toBe(3);
-//   });
-// });
+describe("intentionally invalid test", () => {
+  test("1+1=2", () => {
+    expect(1 + 1).toBe(3);
+  });
+});
 
 describe(`from "/healthcheck`, () => {
   describe("GET", () => {
