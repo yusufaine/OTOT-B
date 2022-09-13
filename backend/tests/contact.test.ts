@@ -46,7 +46,7 @@ describe(`from "/contacts"`, () => {
         const res = await request(app)
           .post("/api/contacts")
           .send(invalidContact);
-        expect(res.statusCode).toBe(200);
+        expect(res.statusCode).toBe(400);
         expect(res.body.message).toBe("email and name has to be specified");
       });
     });
@@ -69,7 +69,7 @@ describe(`from "/contacts/:contact_id`, () => {
       test("returns error json", async () => {
         const invalidContactId = "-1";
         const res = await request(app).get(`/api/contacts/${invalidContactId}`);
-        expect(res.statusCode).toBe(200);
+        expect(res.statusCode).toBe(400);
         expect(res.body.message).toBe("expected hex string of length 24");
       });
       describe("given an invalid contact_id of valid length", () => {
@@ -78,7 +78,7 @@ describe(`from "/contacts/:contact_id`, () => {
           const res = await request(app).get(
             `/api/contacts/${invalidContactId}`
           );
-          expect(res.statusCode).toBe(200);
+          expect(res.statusCode).toBe(400);
           expect(res.body.message).toBe("expected hex string of length 24");
         });
       });
@@ -88,7 +88,7 @@ describe(`from "/contacts/:contact_id`, () => {
           const res = await request(app).get(
             `/api/contacts/${invalidContactId}`
           );
-          expect(res.statusCode).toBe(200);
+          expect(res.statusCode).toBe(400);
           expect(res.body.message).toBe(`${invalidContactId} not found`);
         });
       });

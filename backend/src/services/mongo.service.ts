@@ -16,4 +16,4 @@ mongoClient.connect((error, result) => {
 
 export const mongoCollection = mongoClient
   .db(dbConfig.dbName)
-  .collection<ContactSchemaSchema>(dbConfig.dbCollection);
+  .collection<ContactSchema>(dbConfig.dbCollection);
