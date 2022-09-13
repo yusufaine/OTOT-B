@@ -1,5 +1,7 @@
-import express from "express";
+import cors from "cors";
 import BodyParser from "body-parser";
+import express, { Request } from "express";
+
 import routes from "../routes/contact.route";
 
 function createServer() {
@@ -10,6 +12,7 @@ function createServer() {
     })
   );
   app.use(BodyParser.json());
+  app.use(cors<Request>());
   routes(app);
 
   return app;
