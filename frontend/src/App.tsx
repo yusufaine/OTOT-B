@@ -1,23 +1,17 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 import "./App.css";
 import MuiTable from "./components/table";
+import { axiosInstance } from "./utils/axios.utils";
 
 function App() {
-  const instance = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_API || "http://localhost:8080",
-  });
-
-  console.log(instance.getUri());
-
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
   const addToList = () => {
-    instance
+    axiosInstance
       .post("/api/contacts", {
         email,
         gender,
@@ -28,7 +22,7 @@ function App() {
   };
 
   const getList = () => {
-    instance.get("/api/contacts");
+    axiosInstance.get("/api/contacts");
   };
 
   return (
@@ -85,7 +79,7 @@ function App() {
       </button>
 
       <h1>Contact List</h1>
-      <MuiTable></MuiTable>
+      <MuiTable />
       {/* {contactList.map((val: ContactSchema, index) => {
         return (
           <div key={index}>

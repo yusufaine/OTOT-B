@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
     "target": "ES2017",
     "sourceMap": true,
     "outDir": "./dist",
@@ -14,10 +14,10 @@
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": false,
-    "noImplicitAny": false,
     "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
+    "noImplicitAny": false,
     "noFallthroughCasesInSwitch": false,
+    "forceConsistentCasingInFileNames": false,
     "esModuleInterop": true
   },
   "include": ["./src/**/*.ts"]

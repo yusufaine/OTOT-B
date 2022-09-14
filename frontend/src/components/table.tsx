@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,16 +8,13 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import { ContactSchema } from "../types/contact.models";
-
-const instance = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_API || "http://localhost:8080",
-});
+import { axiosInstance } from "../utils/axios.utils";
 
 export default function BasicTable() {
   const [contactList, setContactList] = useState([]);
 
   useEffect(() => {
-    instance.get("/api/contacts").then((res) => {
+    axiosInstance.get("/api/contacts").then((res) => {
       setContactList(res.data.data.contacts);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -11,7 +11,7 @@ on:
 
 env:
   PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
-  SERVICE: test_otot_b
+  SERVICE: test-otot-b
   REGION: asia-southeast1
 
 jobs:
@@ -75,6 +75,7 @@ jobs:
             --region ${{ env.REGION }} \
             --image gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} \
             --platform "managed" \
+            --allow-unauthenticated \
             --update-secrets OTOT_B_MONGO_PORT=OTOT_B_MONGO_PORT:latest \
             --update-secrets OTOT_B_MONGO_URI=OTOT_B_MONGO_URI:latest \
             --update-secrets OTOT_B_SOURCE=OTOT_B_SOURCE:latest
