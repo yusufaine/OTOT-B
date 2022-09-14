@@ -126,10 +126,10 @@ export async function update(req: Request) {
   }
 
   const updatedContact: ContactSchema = {
-    email: req.body.email ?? contact.email,
-    name: req.body.name ?? contact.name,
-    gender: req.body.gender ?? contact.gender ?? "",
-    phone: req.body.phone ?? contact.phone ?? "",
+    email: req.body.email || contact.email,
+    name: req.body.name || contact.name,
+    gender: req.body.gender || contact.gender || "",
+    phone: req.body.phone || contact.phone || "",
   };
 
   const update: UpdateFilter<ContactSchema> = { $set: updatedContact };

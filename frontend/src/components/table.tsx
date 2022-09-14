@@ -12,38 +12,44 @@ import { axiosInstance } from "../utils/axios.utils";
 
 export default function BasicTable() {
   const [contactList, setContactList] = useState([]);
-
-  useEffect(() => {
+  const getList = () => {
     axiosInstance.get("/api/contacts").then((res) => {
       setContactList(res.data.data.contacts);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
+
+  useEffect(() => getList, []);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
+            <TableCell></TableCell>
             <TableCell>Name</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Gender</TableCell>
             <TableCell>Phone</TableCell>
+            <TableCell>ID</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {contactList.map((row: ContactSchema) => (
+          {contactList.map((row: ContactSchema & { _id: string }, index) => (
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
+              <TableCell>{index + 1}</TableCell>
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.email}</TableCell>
               <TableCell>{row.gender}</TableCell>
               <TableCell>{row.phone}</TableCell>
+              <TableCell>{row._id}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <input type="button" value="Refresh list" onClick={getList} />
     </TableContainer>
   );
 }

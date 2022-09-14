@@ -1,94 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./App.css";
+import AddContactForm from "./components/form.add";
+import DeleteContactForm from "./components/form.delete";
+import UpdateContactForm from "./components/form.update";
 import MuiTable from "./components/table";
-import { axiosInstance } from "./utils/axios.utils";
 
 function App() {
-  const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-
-  const addToList = () => {
-    axiosInstance
-      .post("/api/contacts", {
-        email,
-        gender,
-        name,
-        phone,
-      })
-      .catch(() => {});
-  };
-
-  const getList = () => {
-    axiosInstance.get("/api/contacts");
-  };
-
   return (
     <div className="App">
-      <h1>Contacts Page</h1>
-
-      <label htmlFor="name">Full name</label>
-      <input
-        type="text"
-        name="name"
-        id=""
-        onChange={(event) => {
-          event.preventDefault();
-          setName(event.target.value);
-        }}
-      />
-
-      <label htmlFor="email">Email</label>
-      <input
-        type="text"
-        name="email"
-        id=""
-        onChange={(event) => {
-          event.preventDefault();
-          setEmail(event.target.value);
-        }}
-      />
-
-      <label htmlFor="gender">Gender</label>
-      <input
-        type="text"
-        name="gender"
-        id=""
-        onChange={(event) => {
-          setGender(event.target.value);
-        }}
-      />
-
-      <label htmlFor="contact">Contact</label>
-      <input
-        type="tel"
-        name="contact"
-        id=""
-        onChange={(event) => {
-          setPhone(event.target.value);
-        }}
-      />
-
-      <button type="submit" onClick={addToList}>
-        add
-      </button>
-      <button type="submit" onClick={getList}>
-        List contacts
-      </button>
-
       <h1>Contact List</h1>
       <MuiTable />
-      {/* {contactList.map((val: ContactSchema, index) => {
-        return (
-          <div key={index}>
-            <h2>
-              {val.name}, {val.email}, {val.gender}, {val.phone}
-            </h2>
-          </div>
-        );
-      })} */}
+      <h1>Add Contacts</h1>
+      <AddContactForm />
+      <h1>Delete contacts</h1>
+      <DeleteContactForm />
+      <h1>Update contacts</h1>
+      <UpdateContactForm />
     </div>
   );
 }
