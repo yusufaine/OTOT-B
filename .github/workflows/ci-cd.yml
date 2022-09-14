@@ -11,7 +11,7 @@ on:
 
 env:
   PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
-  SERVICE: test-otot-b
+  SERVICE: ${{secrets.GCP_APP_NAME}}
   REGION: asia-southeast1
 
 jobs:
