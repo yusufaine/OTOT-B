@@ -10,8 +10,10 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@faker-js/faker": "^7.5.0",
+    "@material-ui/icons": "^4.11.3",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.5",
+    "@mui/x-data-grid": "^5.17.2",
     "@testing-library/dom": ">=7.21.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -22,7 +24,9 @@
     "@types/react-dom": "^18.0.6",
     "axios": "^0.27.2",
     "dotenv": "^16.0.2",
+    "material-ui": "^0.20.2",
     "react": "^18.2.0",
+    "react-data-table-component": "^7.5.3",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.35.0",
     "react-scripts": "^5.0.1",
@@ -52,5 +56,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

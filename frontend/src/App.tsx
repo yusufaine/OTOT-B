@@ -1,22 +1,15 @@
 import React from "react";
 
 import "./App.css";
-import AddContactForm from "./components/form.add";
-import DeleteContactForm from "./components/form.delete";
-import UpdateContactForm from "./components/form.update";
-import MuiTable from "./components/table";
+import SampleTable from "./components/table.sample";
+import ActionSelector from "./components/action-selector";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ padding: 30 }}>
       <h1>Contact List</h1>
-      <MuiTable />
-      <h1>Add Contacts</h1>
-      <AddContactForm />
-      <h1>Delete contacts</h1>
-      <DeleteContactForm />
-      <h1>Update contacts</h1>
-      <UpdateContactForm />
+      <SampleTable />
+      <ActionSelector />
     </div>
   );
 }

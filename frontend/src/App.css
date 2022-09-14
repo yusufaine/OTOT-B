@@ -4,12 +4,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font: 1em sans-serif;
 }
 
 input,
 button {
   width: 150px;
   height: 30px;
-  font-size: 20px;
+  font-size: 18px;
   margin: 8px;
 }
