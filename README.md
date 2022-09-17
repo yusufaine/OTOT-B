@@ -211,6 +211,20 @@ Building from the previos sections, this section briefly goes over how Github Ac
 
 ## Task B3: Implement a Frontend
 
-TODO: Use Next
+For this task, a simple frontend was made using React and MUI's datagrid component to make it easier to see. The website is deployed on Vercel and can be accessed through this link (https://otot-b.vercel.app/).
+
+To use the website, click on "Refresh list" to load the contacts that are saved on the database. It takes a while to load as the backend is hosted on Cloud Run and would take a few seconds to spin up before being able to respond to any of the REST endpoint.
+
+Below the table, there is an action dropdown menu where the CRUD operations can occur by providing the necessary information.
+Note that the `update` action requires the ID of the contact that wants to be updated and functions similar to `PATCH`. This means that in order to remove a field, an empty string (" ") can be provided to simulate that. The table does _not_ automatically updated upon the execution of an action, but a user would only need to click on `Refresh list` and the table would reflect the changes without needing to re-navigate to the right page.
+
+### Screenshot of Contact List frontend
+
+![Simple frontend](https://i.ibb.co/3sGR8ys/image.png)
+
 
 ## Task B4: Pulling data from Serverless Function to Frontend
+
+In this section, I would be pulling data from [Coingecko's API](https://www.coingecko.com/en/api/documentation) of the top 250 cryptocurrencies and display them on a table, but would also include the [Exchange Rates API](https://exchangeratesapi.io/) to allow toggling between different currencies so that users would not need to re-request from Coingecko's API multiple times if they choose to view the performance of the top 250 cryptocurrencies in a FIAT currency that they are familiar with (USD/SGD/GBP/etc.).
+
+For this, I would be using pulling the data from Google's Cloud Functions which gets the data from the relevant endpoints.
