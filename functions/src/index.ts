@@ -23,7 +23,7 @@ export const getCoingeckoData = functions
 export const getExchangeRateData = functions
   .region("asia-southeast1")
   .runWith({
-    memory: "256MB",
+    memory: "128MB",
     secrets: ["API_LAYER_KEY"],
     timeoutSeconds: 300,
   })
