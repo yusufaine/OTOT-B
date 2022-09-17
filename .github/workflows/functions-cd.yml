@@ -45,6 +45,12 @@ jobs:
         working-directory: "functions"
 
     steps:
+      - name: CD
+        run: |
+          pwd
+          cd functions
+          pwd
+
       - name: Deploy to Cloud Functions via Firebase
         uses: joinflux/firebase-tools@v10.7.0
         with:
