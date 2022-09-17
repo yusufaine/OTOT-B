@@ -1,0 +1,33 @@
+name: Serverless Functions CD
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "functions/**"
+      - "!*.md"
+
+env:
+  PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install node modules
+        run: |
+          cd functions
+          yarn install --prefer-offline --frozen-lockfile
+
+      - name: Deploy all Cloud Functions via Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only functions
+        env:
+          FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
