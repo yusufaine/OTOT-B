@@ -37,6 +37,9 @@ jobs:
     name: Deploy to Firebase
     needs: build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "functions"
 
     steps:
       - name: Deploy to Cloud Functions via Firebase
@@ -46,4 +49,3 @@ jobs:
         env:
           GCP_SA_KEY: ${{secrets.GCP_CREDENTIALS}}
           PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
-          PROJECT_PATH: ./functions
