@@ -6,9 +6,6 @@ on:
       - "functions/**"
       - "!*.md"
 
-env:
-  PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -45,15 +42,11 @@ jobs:
         working-directory: "functions"
 
     steps:
-      - name: CD
-        run: |
-          pwd
-          cd functions
-          pwd
-
       - name: Deploy to Cloud Functions via Firebase
-        uses: joinflux/firebase-tools@v10.7.0
+        uses: w9jds/firebase-action@master
         with:
           args: deploy --only functions
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          GCP_SA_KEY: ${{secrets.GCP_CREDENTIALS}}
+          PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
+          PROJECT_PATH: ./functions
