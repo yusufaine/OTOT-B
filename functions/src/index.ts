@@ -7,7 +7,7 @@ export const getCoingeckoData = functions
   .region("asia-southeast1")
   .runWith({
     memory: "256MB",
-    timeoutSeconds: 301,
+    timeoutSeconds: 300,
   })
   .https.onRequest(async (req, res) => {
     try {
