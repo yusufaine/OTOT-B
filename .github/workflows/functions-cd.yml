@@ -10,7 +10,7 @@ env:
   PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: "read"
@@ -33,7 +33,17 @@ jobs:
       - name: Install project dependencies
         run: yarn install --prefer-offline --frozen-lockfile
 
-      - name: Deploy to Firebase via Firebase
-        uses: BIGG-Kaymo/deploy-firebase-functions@v1.0.1
+      - name: Build
+        run: yarn build
+
+  deploy:
+    name: Deploy to Firebase
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Cloud Functions via Firebase
+        uses: joinflux/firebase-tools@v9.16.0
+        with:
+          args: deploy --only functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
