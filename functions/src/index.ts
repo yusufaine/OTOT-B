@@ -6,7 +6,7 @@ import { getCgData } from "./services/coingecko";
 export const getCoingeckoData = functions
   .region("asia-southeast1")
   .runWith({
-    memory: "256MB",
+    memory: "128MB",
     timeoutSeconds: 300,
   })
   .https.onRequest(async (req, res) => {

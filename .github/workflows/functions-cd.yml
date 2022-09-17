@@ -15,14 +15,23 @@ jobs:
     permissions:
       contents: "read"
       id-token: "write"
+    defaults:
+      run:
+        working-directory: "functions"
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install node modules
-        run: |
-          cd functions
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
+
+      - name: Install project dependencies
+        run: yarn install --prefer-offline --frozen-lockfile
 
       - name: Deploy to Firebase via Firebase
         uses: BIGG-Kaymo/deploy-firebase-functions@v1.0.1
