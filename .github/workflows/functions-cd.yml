@@ -40,6 +40,10 @@ jobs:
     name: Deploy to Firebase
     needs: build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "functions"
+
     steps:
       - name: Deploy to Cloud Functions via Firebase
         uses: joinflux/firebase-tools@v9.16.0
