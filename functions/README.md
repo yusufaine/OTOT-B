@@ -1,12 +1,12 @@
-# `cron-jobs`
+# `functions`
 
 ## Installing
 
 ```sh
 # clone this repository and all submodules:
-git clone --recurse-submodules git@github.com:coinhall/cron-jobs.git
+git clone git@github.com:yusufaine/OTOT-B.git
 # change into the `cron-jobs` directory:
-cd cron-jobs
+cd functions
 # install all dependencies
 yarn
 ```
@@ -14,7 +14,7 @@ yarn
 To develop locally, create a `~/.secret.local` file and fill it up appropriately with the following contents:
 
 ```sh
-MONGO_URI=""
+API_LAYER_KEY=""
 ```
 
 ## Developing
@@ -22,6 +22,10 @@ MONGO_URI=""
 ```sh
 # setup Firebase first
 firebase login
+
+# run ts file directly
+tsx <file>.ts
+
 # manually start a local functions emulator
 yarn serve
 ```
@@ -37,6 +41,7 @@ yarn deploy
 - **Important**: explicitly allow functions to access needed secrets in the `runWith` parameter (secrets will be `undefined` otherwise)
 - Whenever a new value for a secret is set, redeploy all functions that reference that secret for them to pick up the latest value
 - Ensure that no deployed functions reference a secret before deleting the secret; functions that use a secret value that has been deleted will fail silently
+- This can be done on GCP Secret Manager as well
 
 ```sh
 # Set the value of an existing secret

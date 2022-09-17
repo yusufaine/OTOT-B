@@ -1,9 +1,9 @@
 {
-  "name": "@coinhall/functions",
+  "name": "functions",
   "private": true,
   "main": "dist/index.js",
   "engines": {
-    "node": "14"
+    "node": "16"
   },
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register --transpile-only",
