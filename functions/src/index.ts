@@ -25,7 +25,7 @@ export const getExchangeRateData = functions
   .runWith({
     memory: "256MB",
     secrets: ["API_LAYER_KEY"],
-    timeoutSeconds: 300,
+    timeoutSeconds: 301,
   })
   .https.onRequest(async (req, res) => {
     try {
