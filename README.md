@@ -227,12 +227,22 @@ Note that the `update` action requires the ID of the contact that wants to be up
 
 In this section, I would be pulling data from [Coingecko's API](https://www.coingecko.com/en/api/documentation) of the top 250 cryptocurrencies and display them on a table.
 
-For this, I would be using pulling the data from Google's Cloud Functions which gets the data from the relevant endpoints.
+For this, I would be using pulling the data from Google's Cloud Functions which gets the data from the relevant endpoints. The frontend has been deployed [here](https://otot-b4.vercel.app/).
 
 ### Screenshot of B4
 
+#### Default view
+
 ![img](https://i.ibb.co/pKYj9jd/image.png)
 
-### Future improvements
+#### Sort by decreasing price
+
+![img](https://i.ibb.co/8zY1j8g/image.png)
+
+#### Filter by Market Cap (>5 billion)
+
+![img](https://i.ibb.co/92QFtTr/image.png)
+
+### Potential improvements
 
 In the future, [Exchange Rates API](https://exchangeratesapi.io/) can be integrated to allow toggling between different currencies so that users would not need to re-request from Coingecko's API multiple times if they choose to view the performance of the top 250 cryptocurrencies in a FIAT currency that they are familiar with (USD/SGD/GBP/etc.).
