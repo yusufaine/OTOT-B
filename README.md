@@ -211,7 +211,7 @@ Building from the previos sections, this section briefly goes over how Github Ac
 
 ## Task B3: Implement a Frontend
 
-For this task, a simple frontend was made using React and MUI's datagrid component to make it easier to see. The website is deployed on Vercel and can be accessed through this link (https://otot-b.vercel.app/).
+For this task, a simple frontend was made using React and MUI's datagrid component to make it easier to see. The website is deployed on Vercel and can be accessed through this link [https://otot-b.vercel.app/](https://otot-b.vercel.app/).
 
 To use the website, click on "Refresh list" to load the contacts that are saved on the database. It takes a while to load as the backend is hosted on Cloud Run and would take a few seconds to spin up before being able to respond to any of the REST endpoint.
 
@@ -227,7 +227,7 @@ Note that the `update` action requires the ID of the contact that wants to be up
 
 In this section, I would be pulling data from [Coingecko's API](https://www.coingecko.com/en/api/documentation) of the top 250 cryptocurrencies and display them on a table.
 
-For this, I would be using pulling the data from Google's Cloud Functions which gets the data from the relevant endpoints. The frontend has been deployed [here](https://otot-b4.vercel.app/).
+For this, I would be using pulling the data from Google's Cloud Functions which gets the data from the relevant endpoints. The frontend has been deployed here  [https://otot-b4.vercel.app/](https://otot-b4.vercel.app/).
 
 ### Screenshot of B4
 
