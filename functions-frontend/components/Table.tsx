@@ -1,30 +1,33 @@
-import { ClassNames } from "@emotion/react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from "axios";
 import React from "react";
 
 export default function CryptoDataGrid() {
   const columns = [
-    { field: "market_cap_rank", headerName: "#", width: 50 },
-    { field: "symbol", headerName: "Symbol", flex: 1 },
-    { field: "name", headerName: "Name", flex: 1 },
+    { field: "market_cap_rank", type: "number", headerName: "#", width: 50 },
+    { field: "symbol", type: "string", headerName: "Symbol", flex: 1 },
+    { field: "name", type: "string", headerName: "Name", flex: 1 },
     {
       field: "current_price",
+      type: "number",
       headerName: "Current Price",
       flex: 1,
     },
     {
       field: "price_change_percentage_24h",
+      type: "number",
       headerName: "% Change (24h)",
       flex: 1,
     },
     {
       field: "market_cap",
+      type: "number",
       headerName: "Market Cap",
       flex: 1,
     },
     {
       field: "market_cap_change_percentage_24h",
+      type: "number",
       headerName: "% Change (24h)",
       flex: 1,
     },
@@ -61,6 +64,7 @@ export default function CryptoDataGrid() {
         />{" "}
         <br />
         <DataGrid
+          components={{ Toolbar: GridToolbar }}
           rows={cryptoList}
           columns={columns}
           autoHeight
