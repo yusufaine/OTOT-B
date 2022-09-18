@@ -225,6 +225,14 @@ Note that the `update` action requires the ID of the contact that wants to be up
 
 ## Task B4: Pulling data from Serverless Function to Frontend
 
-In this section, I would be pulling data from [Coingecko's API](https://www.coingecko.com/en/api/documentation) of the top 250 cryptocurrencies and display them on a table, but would also include the [Exchange Rates API](https://exchangeratesapi.io/) to allow toggling between different currencies so that users would not need to re-request from Coingecko's API multiple times if they choose to view the performance of the top 250 cryptocurrencies in a FIAT currency that they are familiar with (USD/SGD/GBP/etc.).
+In this section, I would be pulling data from [Coingecko's API](https://www.coingecko.com/en/api/documentation) of the top 250 cryptocurrencies and display them on a table.
 
 For this, I would be using pulling the data from Google's Cloud Functions which gets the data from the relevant endpoints.
+
+### Screenshot of B4
+
+![img](https://i.ibb.co/pKYj9jd/image.png)
+
+### Future improvements
+
+In the future, [Exchange Rates API](https://exchangeratesapi.io/) can be integrated to allow toggling between different currencies so that users would not need to re-request from Coingecko's API multiple times if they choose to view the performance of the top 250 cryptocurrencies in a FIAT currency that they are familiar with (USD/SGD/GBP/etc.).
