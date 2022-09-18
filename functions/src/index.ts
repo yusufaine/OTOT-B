@@ -10,6 +10,7 @@ export const getCoingeckoData = functions
     timeoutSeconds: 300,
   })
   .https.onRequest(async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
     try {
       const cgData = await getCgData();
       res.json(cgData);
@@ -28,6 +29,7 @@ export const getExchangeRateData = functions
     timeoutSeconds: 300,
   })
   .https.onRequest(async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
     try {
       if (!process.env.API_LAYER_KEY) {
         throw new Error("API key not specified in secrets manager");

@@ -19,6 +19,7 @@ export async function getErData(key: string): Promise<ExchangeRateAsset> {
   for (const key of Object.keys(data.quotes)) {
     quoteMap[key.slice(data.source.length)] = data.quotes[key];
   }
+  quoteMap["USD"] = 1;
 
   const result: ExchangeRateAsset = {
     quotes: quoteMap,
