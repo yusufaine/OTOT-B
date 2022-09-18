@@ -218,10 +218,13 @@ To use the website, click on "Refresh list" to load the contacts that are saved 
 Below the table, there is an action dropdown menu where the CRUD operations can occur by providing the necessary information.
 Note that the `update` action requires the ID of the contact that wants to be updated and functions similar to `PATCH`. This means that in order to remove a field, an empty string (" ") can be provided to simulate that. The table does _not_ automatically updated upon the execution of an action, but a user would only need to click on `Refresh list` and the table would reflect the changes without needing to re-navigate to the right page.
 
+<div style="page-break-after: always"></div>
+
 ### Screenshot of Contact List frontend
 
 ![Simple frontend](https://i.ibb.co/3sGR8ys/image.png)
 
+<div style="page-break-after: always"></div>
 
 ## Task B4: Pulling data from Serverless Function to Frontend
 
@@ -231,17 +234,27 @@ For this, I would be using pulling the data from Google's Cloud Functions which 
 
 ### Screenshot of B4
 
+#### Deployed Cloud Function
+
+![Cloud Function](https://i.ibb.co/b3rfMJH/image.png)
+
+<div style="page-break-after: always"></div>
+
 #### Default view
 
-![img](https://i.ibb.co/pKYj9jd/image.png)
+![default view](https://i.ibb.co/pKYj9jd/image.png)
+
+<div style="page-break-after: always"></div>
 
 #### Sort by decreasing price
 
-![img](https://i.ibb.co/8zY1j8g/image.png)
+![sorted view](https://i.ibb.co/8zY1j8g/image.png)
+
+<div style="page-break-after: always"></div>
 
 #### Filter by Market Cap (>5 billion)
 
-![img](https://i.ibb.co/92QFtTr/image.png)
+![filtered view](https://i.ibb.co/92QFtTr/image.png)
 
 ### Potential improvements
 
