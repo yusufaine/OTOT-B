@@ -10,6 +10,14 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+button {
+  width: 150px;
+  height: 30px;
+  font-size: 18px;
+  margin: 8px;
+  color: green;
+}
+
 a {
   color: inherit;
   text-decoration: none;

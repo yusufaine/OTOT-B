@@ -1,3 +1,4 @@
+import { ClassNames } from "@emotion/react";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import React from "react";
@@ -51,16 +52,25 @@ export default function CryptoDataGrid() {
         marginTop: "2rem",
       }}
     >
-      <DataGrid
-        rows={cryptoList}
-        columns={columns}
-        autoHeight
-        disableSelectionOnClick
-        pageSize={pageSize}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[5, 10, 20, 25, 50]}
-        pagination
-      />
+      <div className="flex flex-col cursor-pointer">
+        <input
+          type="button"
+          value="Refresh list"
+          onClick={getList}
+          className="bg-neutral-300 px-5 py-1 border-l-neutral-900 rounded-lg text-neutral-900 pad cursor-pointer"
+        />{" "}
+        <br />
+        <DataGrid
+          rows={cryptoList}
+          columns={columns}
+          autoHeight
+          disableSelectionOnClick
+          pageSize={pageSize}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          rowsPerPageOptions={[5, 10, 20, 25, 50]}
+          pagination
+        />
+      </div>
       Prices are in USD. <br />
       Last updated: {timestamp}
     </div>
