@@ -248,7 +248,7 @@ For this, I would be using pulling the data from Google's Cloud Functions which 
 
 #### Sort by decreasing price
 
-![sorted view](https://i.ibb.co/8zY1j8g/image.png)
+![sorted view](https://i.ibb.co/sKSrVX1/image.png)
 
 <div style="page-break-after: always"></div>
 
