@@ -39,6 +39,7 @@
     "clean": "rimraf dist",
     "dev": "tsx watch ./src/index.ts",
     "start": "yarn build && node ./dist/index.js",
+    "start:dev": "yarn dev",
     "test": "jest --forceExit"
   }
 }
