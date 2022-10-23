@@ -12,8 +12,8 @@
 2. `.env` file that follows the format as shown:
 
     ```text
-    PORT=<number>
-    MONGO_URI=mongodb+srv://<user>:<password>@<database_url>
+    OTOT_B_PORT=8080
+    OTOT_B_MONGO_URI=mongodb+srv://<user>:<password>@<database_url>
     ```
 
 3. Docker for easy installation -- this would be used.
@@ -29,7 +29,7 @@ yarn
 
 # build the docker image
 docker build . -t otot-b1-demo
-docker run -dp <local port>:<exposed port> otot-b1-demo
+docker run -dp 8080:8080 otot-b1-demo
 
 # verify that it's running correctly 
 docker ps -a
@@ -118,8 +118,8 @@ Swap the current values of `host` and `deployed` to test the local/deployed envi
 
 Explanation of HTTP requests:
 
-* `hello world`: test that Express is working
-* `router test`: test that `router.use()` is working
+* `/`: test that Express is working
+* `healthcheck`: test that `router.use()` is working
 * `contacts`: list all contacts (might be empty initially)
 * `contacts/add/valid`: adds a valid user as seen in `body`
 * `contacts/add/invalid`: tries to add an invalid user as seen in `body`, name is missing
